@@ -20,6 +20,12 @@ flowchart
    EC2
    CloudWatch
    ...
+
+subgraph DevBranches
+    AWSDevRed
+    AWSDevGreen
+    AWSDevBlue
+    end
   end
 
   AWSStaging
@@ -34,6 +40,8 @@ flowchart
    Libraries
   end
   
+  Dependencies
+
   subgraph Tests
    Unit
    Integration
@@ -49,16 +57,15 @@ flowchart
     Format
     StaticTypeChecking
    end
-   
+
    DebugTools
    TemplatesEngine
    MonorepoManagement
    SyntheticDataGeneration
    PreCommitHooks
   end
-  
+
   Makefiles
-  Dependencies
   Dockerfiles
   Configurations
   IaC
@@ -80,7 +87,7 @@ flowchart
  end
 
  subgraph Secrets
-  
+
  end
 
  subgraph Web
@@ -97,9 +104,18 @@ flowchart
   Containers
  end
 
+ subgraph Authentication
+ end
+
+ subgraph Interfaces
+  APIs
+  UIs
+  CLIs
+ end
+
  Applications --> Libraries
  Services --> Libraries
- 
+
  Secrets --> CI/CD
  VCS --> CI/CD
 
@@ -109,4 +125,10 @@ flowchart
  CI/CD --IaC--> AWS
 
  AWS --> Monitoring
+
+ SourceCode --> Dependencies
+ Tests --> Dependencies
+
+ AWS --> Interfaces
+ Users --> Interfaces
 ```
